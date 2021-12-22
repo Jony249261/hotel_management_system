@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\controllers\RoomtypeController;
 use App\Http\controllers\RoomController;
+use App\Http\controllers\CustomerController;
 
 
 /*
@@ -33,3 +34,7 @@ Route::get('admin/roomtype/{id}/delete',[RoomtypeController::class,'destroy']);
 //Room Controller
 Route::resource('admin/rooms',RoomController::class);
 Route::get('admin/rooms/{id}/delete',[RoomController::class,'destroy']);
+
+//Customer Controller
+Route::resource('admin/customer',CustomerController::class);
+Route::get('admin/customer/{id}/delete',[CustomerController::class,'destroy']);

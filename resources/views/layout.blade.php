@@ -91,6 +91,19 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(!request()->is('admin/customer*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#customer"
+                    aria-expanded="true" aria-controls="roommaster">
+                    <i class="fas fa-fw fa-hospital"></i>
+                    <span>Customer</span>
+                </a>
+                <div id="customer" class="collapse @if(request()->is('admin/customer*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item @if($route == 'customer.create') active @endif" href="{{url('admin/customer/create')}}">Add New</a>
+                        <a class="collapse-item @if($route == 'customer.index') active @endif" href="{{url('admin/customer')}}">Customer List</a>
+                    </div>
+                </div>
+            </li>
 
         </ul>
         <!-- End of Sidebar -->
