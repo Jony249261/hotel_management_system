@@ -56,7 +56,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{url('admin')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -106,6 +106,32 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item @if($route == 'customer.create') active @endif" href="{{url('admin/customer/create')}}">Add New</a>
                         <a class="collapse-item @if($route == 'customer.index') active @endif" href="{{url('admin/customer')}}">Customer List</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if(!request()->is('admin/department*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#department"
+                    aria-expanded="true" aria-controls="roommaster">
+                    <i class="fas fa-fw fa-hospital"></i>
+                    <span>Department</span>
+                </a>
+                <div id="department" class="collapse @if(request()->is('admin/department*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item @if($route == 'department.create') active @endif" href="{{url('admin/department/create')}}">Add New</a>
+                        <a class="collapse-item @if($route == 'department.index') active @endif" href="{{url('admin/department')}}">Customer List</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if(!request()->is('admin/staff*')) collapsed @endif" href="#" data-toggle="collapse" data-target="#staff"
+                    aria-expanded="true" aria-controls="roommaster">
+                    <i class="fas fa-fw fa-hospital"></i>
+                    <span>Staff</span>
+                </a>
+                <div id="staff" class="collapse @if(request()->is('admin/staff*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item @if($route == 'staff.create') active @endif" href="{{url('admin/staff/create')}}">Add New</a>
+                        <a class="collapse-item @if($route == 'staff.index') active @endif" href="{{url('admin/staff')}}">Customer List</a>
                     </div>
                 </div>
             </li>

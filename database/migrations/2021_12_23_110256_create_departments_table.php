@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPriceToRoomTypesTable extends Migration
+class CreateDepartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddPriceToRoomTypesTable extends Migration
      */
     public function up()
     {
-        Schema::table('room_types', function (Blueprint $table) {
-            //
+        Schema::create('departments', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('detail');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddPriceToRoomTypesTable extends Migration
      */
     public function down()
     {
-        Schema::table('room_types', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('departments');
     }
 }
