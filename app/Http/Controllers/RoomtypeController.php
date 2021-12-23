@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use App\Models\RoomType;
+use App\Models\Roomtypeimage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RoomtypeController extends Controller
 {
@@ -47,6 +49,20 @@ class RoomtypeController extends Controller
         $data->price = $request->price;
         $data->details = $request->details;
         $data->save();
+
+        if($request->file('imgs')){
+            foreach($request->file('imgs') as $img){
+                //$file = $request->file('img');
+                 $filename = date('Ymdhi').$img->getClientOriginalName();
+                $img->move(public_path('image'), $filename);
+                $imgData=new Roomtypeimage;
+                $imgData->room_type_id=$data->id;
+                $imgData->img_src=$filename;
+                $imgData->img_alt=$request->title;
+                $imgData->save();
+            }
+        }
+
         Session::flash('success','Room Type Added Successfully');
         return redirect()->route('roomtype.index');
     }
@@ -84,6 +100,8 @@ class RoomtypeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        //dd($request);
         $data = RoomType::findorFail($id);
         $request->validate([
             'title' => 'required',
@@ -94,6 +112,30 @@ class RoomtypeController extends Controller
         $data->price = $request->price;
         $data->details = $request->details;
         $data->save();
+
+        if($request->file('imgs')){
+            $imgData= Roomtypeimage::where('room_type_id',$id)->get();
+        foreach($imgData as $imgs){
+            //dd($imgs);
+            if($imgs['img_src']) {
+                @unlink(public_path('image/'.$imgs->img_src));
+            
+            }
+            $imgs->delete();
+        }
+
+        foreach($request->file('imgs') as $img){
+            //$file = $request->file('img');
+             $filename = date('Ymdhi').$img->getClientOriginalName();
+            $img->move(public_path('image'), $filename);
+            
+            $imgData=new Roomtypeimage;
+            $imgData->room_type_id=$id;
+            $imgData->img_src=$filename;
+            $imgData->img_alt=$request->title;
+            $imgData->save();
+        }
+        }
         Session::flash('success','Room Type Updated Successfully');
         return redirect()->route('roomtype.index');
     }
@@ -109,5 +151,18 @@ class RoomtypeController extends Controller
         $data = RoomType::find($id)->delete();
         Session::flash('success','Room Type Deleted Successfully');
         return redirect()->route('roomtype.index');
+    }
+
+    public function destroy_image($img_id)
+    {
+        $data=Roomtypeimage::where('id',$img_id)->first();
+        if($data['img_src']) {
+            @unlink(public_path('image/'.$data->img_src));
+        
+        }
+        $data->delete();
+
+       Roomtypeimage::where('id',$img_id)->delete();
+       return response()->json(['bool'=>true]);
     }
 }

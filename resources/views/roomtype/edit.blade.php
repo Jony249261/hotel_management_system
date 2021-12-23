@@ -12,7 +12,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form action="{{url('admin/roomtype/'.$data->id)}}" method="post">
+                                <form action="{{url('admin/roomtype/'.$data->id)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <table class="table table-bordered" >
@@ -41,6 +41,24 @@
                                         </td>
                                         </tr>
                                         <tr>
+                                            <th>Gallery Images</th>
+                                            <td>
+                                                <table class="table table-bordered mt-3">
+                                                    <tr>
+                                                        <input type="file" multiple name="imgs[]" /> 
+                                                        @foreach($data->roomtypeimgs as $img)
+                                                        <td class="imgcol{{$img->id}}">
+                                                            <img width="150" src="{{asset('image/'.$img->img_src)}}" />
+<p class="mt-2">
+    <button type="button" onclick="return confirm('Are you sure you want to delete this image??')" class="btn btn-danger btn-sm delete-image" data-image-id="{{$img->id}}"><i class="fa fa-trash"></i></button>
+</p>
+                                                        </td>
+                                                        @endforeach
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="2">
                                                 <input type="submit" class="btn btn-primary" value="Updated">
                                             </td>
@@ -54,4 +72,30 @@
 
 </div>
 <!-- /.container-fluid -->
+
+
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".delete-image").on('click',function(){
+            var _img_id=$(this).attr('data-image-id');
+            //console.log(_img_id);
+            var _vm=$(this);
+            $.ajax({
+                url:"{{url('admin/roomtypeimage/delete')}}/"+_img_id,
+                dataType:'json',
+                beforeSend:function(){
+                    _vm.addClass('disabled');
+                },
+                success:function(res){
+                    if(res.bool==true){
+                        $(".imgcol"+_img_id).remove();
+                    }
+                    _vm.removeClass('disabled');
+                }
+            });
+        });
+    });
+</script>
+@endsection
 @endsection

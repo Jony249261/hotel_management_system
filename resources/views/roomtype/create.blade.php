@@ -12,7 +12,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form action="{{url('admin/roomtype')}}" method="post">
+                                <form action="{{url('admin/roomtype')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <table class="table table-bordered" >
                                         <tr>
@@ -40,6 +40,10 @@
                                                     <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Gallery</th>
+                                            <td><input type="file" multiple name="imgs[]" /></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
