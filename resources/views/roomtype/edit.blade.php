@@ -18,11 +18,27 @@
                                     <table class="table table-bordered" >
                                         <tr>
                                             <th>Title</th>
-                                            <td><input name="title" type="text" class="form-control" value="{{$data->title}}"></td>
+                                            <td><input name="title" type="text" class="form-control" value="{{$data->title}}">
+                                            @error('title')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Price</th>
+                                            <td><input name="price" type="text" class="form-control" value="{{$data->price}}">
+                                            @error('price')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                        </td>
                                         </tr>
                                         <tr>
                                             <th>Details</th>
-                                            <td><textarea name="details" class="form-control">{{$data->details}}</textarea></td>
+                                            <td><textarea name="details" class="form-control">{{$data->details}}</textarea>
+                                            @error('details')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                        </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">

@@ -15,6 +15,11 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Blank</title>
+    @if(!Session::has('adminData'))
+        <script type="text/javascript">
+            window.location.href="{{url('admin/login')}}";
+        </script>
+    @endif
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -286,7 +291,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee </span>
                                 <img class="img-profile rounded-circle"
                                     src="{{asset('img/undraw_profile.svg')}}">
                             </a>
@@ -306,7 +311,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{url('admin/logout')}}">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -447,6 +452,17 @@ $(document).on("click", "#accept", function(e){
         }
   });
 });
+</script>
+<script>
+  $(document).ready(function(){
+    $('#image').change(function(e){
+      var reader = new FileReader();
+      reader.onload = function(e){
+        $('#showImage').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files['0']);
+    });
+  });
 </script>
     @yield('scripts')
 </body>

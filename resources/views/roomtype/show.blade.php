@@ -20,6 +20,10 @@
                                             <td><input name="title" type="text" class="form-control" value="{{$data->title}}" disabled></td>
                                         </tr>
                                         <tr>
+                                            <th>Price</th>
+                                            <td><input name="price" type="text" class="form-control" value="{{$data->price}}" disabled></td>
+                                        </tr>
+                                        <tr>
                                             <th>Details</th>
                                             <td><textarea disabled name="details" class="form-control">{{$data->details}}</textarea></td>
                                         </tr>

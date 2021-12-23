@@ -40,9 +40,11 @@ class RoomtypeController extends Controller
         $request->validate([
             'title' => 'required',
             'details' => 'required',
+            'price' => 'required|integer',
             ]);
         $data = new RoomType();
         $data->title = $request->title;
+        $data->price = $request->price;
         $data->details = $request->details;
         $data->save();
         Session::flash('success','Room Type Added Successfully');
@@ -85,9 +87,11 @@ class RoomtypeController extends Controller
         $data = RoomType::findorFail($id);
         $request->validate([
             'title' => 'required',
+            'price' => 'required|integer',
             'details' => 'required',
             ]);
         $data->title = $request->title;
+        $data->price = $request->price;
         $data->details = $request->details;
         $data->save();
         Session::flash('success','Room Type Updated Successfully');

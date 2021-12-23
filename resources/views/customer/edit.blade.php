@@ -36,15 +36,6 @@
                                             
                                         </tr>
                                         <tr>
-                                            <th>Password</th>
-                                            <td><input name="password" type="password" class="form-control">
-                                                @error('password')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </td>
-                                            
-                                        </tr>
-                                        <tr>
                                             <th>Mobile</th>
                                             <td><input name="mobile" type="text" class="form-control" value="{{$data->mobile}}">
                                                 @error('mobile')
@@ -55,7 +46,16 @@
                                         </tr>
                                         <tr>
                                             <th>Photo</th>
-                                            <td><input name="photo" type="file">
+                                            <td>
+                                            <img class=" img-fluid"
+                       src="{{url('upload/customer_image/'.$data->photo)}}"
+                       alt="User profile picture"  id="showImage">
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>Photo</th>
+                                            <td><input name="photo" type="file" id="image">
                                                 @error('photo')
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror

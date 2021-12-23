@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Customer;
 
 
+
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -72,7 +73,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $data = Customer::find($id)->first();
+        $data = Customer::find($id);
         return view('customer.show',compact('data'));
     }
 
@@ -97,16 +98,29 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Customer::findorFail($id);
+        //dd($request);
         $request->validate([
-            'title' => 'required',
-            'customertype' => 'required',
+            'full_name' => 'required',
+            'email' => 'required|email',
+            'mobile' => 'required',
+            'address' => 'required',
             ]);
-            $data->title = $request->title;
-            $data->customer_type_id = $request->customertype;
+        $data = Customer::findorFail($id);
+        $data->full_name = $request->full_name;
+        $data->email = $request->email;
+        $data->mobile = $request->mobile;
+        $data->address = $request->address;
+        if($request->file('photo')) {
+            @unlink(public_path('upload/customer_image/'.$data->photo));
+            $file = $request->file('photo');
+            $filename = date('Ymdhi').$file->getClientOriginalName();
+            $file->move(public_path('upload/customer_image'), $filename);
+            $data['photo'] = $filename;
+        
+        }
         $data->save();
         Session::flash('success','Customer Updated Successfully');
-        return redirect()->route('customers.index');
+        return redirect()->route('customer.index');
     }
 
     /**
