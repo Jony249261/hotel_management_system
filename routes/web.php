@@ -8,6 +8,7 @@ use App\Http\controllers\CustomerController;
 use App\Http\controllers\StaffDepartmentController;
 use App\Http\controllers\StaffController;
 use App\Http\controllers\BookingController;
+use App\Http\controllers\HomeController;
 
 
 /*
@@ -21,18 +22,16 @@ use App\Http\controllers\BookingController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+
+Route::get('/', [HomeController::class,'home']);
 
 
 Route::get('/admin/login', [AdminController::class,'login']);
 Route::post('/admin/login', [AdminController::class,'check_login']);
 Route::get('/admin/logout', [AdminController::class,'logout']);
 
-Route::get('/admin', function () {
-    return view('dashboard');
-});
+// Admin Dashboard
+Route::get('admin',[AdminController::class,'dashboard']);
 
 //RoomType Controller
 Route::resource('admin/roomtype',RoomtypeController::class);
@@ -69,3 +68,17 @@ Route::get('admin/staff/payment/{id}/{staff_id}/delete',[StaffController::class,
 Route::get('admin/booking/{id}/delete',[BookingController::class,'destroy']);
 Route::get('admin/booking/available-rooms/{checkin_date}',[BookingController::class,'available_rooms']);
 Route::resource('admin/booking',BookingController::class);
+
+
+
+
+Route::get('login',[CustomerController::class,'login']);
+Route::post('customer/login',[CustomerController::class,'customer_login']);
+Route::get('register',[CustomerController::class,'register']);
+Route::get('logout',[CustomerController::class,'logout']);
+
+
+//Front booking
+Route::get('booking',[BookingController::class,'front_booking']);
+Route::get('booking/success',[BookingController::class,'booking_payment_success']);
+Route::get('booking/fail',[BookingController::class,'booking_payment_fail']);

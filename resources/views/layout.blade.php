@@ -44,7 +44,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('admin')}}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -118,7 +118,7 @@
                 <div id="department" class="collapse @if(request()->is('admin/department*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item @if($route == 'department.create') active @endif" href="{{url('admin/department/create')}}">Add New</a>
-                        <a class="collapse-item @if($route == 'department.index') active @endif" href="{{url('admin/department')}}">Customer List</a>
+                        <a class="collapse-item @if($route == 'department.index') active @endif" href="{{url('admin/department')}}">Department List</a>
                     </div>
                 </div>
             </li>
@@ -131,7 +131,7 @@
                 <div id="staff" class="collapse @if(request()->is('admin/staff*')) show @endif" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item @if($route == 'staff.create') active @endif" href="{{url('admin/staff/create')}}">Add New</a>
-                        <a class="collapse-item @if($route == 'staff.index') active @endif" href="{{url('admin/staff')}}">Customer List</a>
+                        <a class="collapse-item @if($route == 'staff.index') active @endif" href="{{url('admin/staff')}}">Staff List</a>
                     </div>
                 </div>
             </li>
@@ -411,12 +411,7 @@
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
+   
 
 
     <!-- Page level plugins -->

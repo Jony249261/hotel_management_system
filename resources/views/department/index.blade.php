@@ -6,8 +6,8 @@
 
 <div class="card shadow mb-4">
                         <div class="card-header py-3 bg-primary" style="color:white !important">
-                            <h6 class="m-0 font-weight-bold ">Room List
-                                <a href="{{url('admin/department/create')}}" class="btn btn-success float-right">Add Room</a>
+                            <h6 class="m-0 font-weight-bold ">Department List
+                                <a href="{{url('admin/department/create')}}" class="btn btn-success float-right">Add Department</a>
                             </h6>
                         </div>
                         <div class="card-body">

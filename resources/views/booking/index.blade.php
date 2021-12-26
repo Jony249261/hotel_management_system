@@ -48,7 +48,7 @@
                                             <td>{{$booking->checkin_date}}</td>
                                             <td>{{$booking->checkout_date}}</td>
                                             <td>{{$booking->ref}}</td>
-                                            <td><a href="{{url('admin/booking/'.$booking->id.'/delete')}}" class="text-danger" onclick="return confirm('Are you sure you want to delete this data?')"><i class="fa fa-trash"></i></a></td>
+                                            <td><a href="{{url('admin/booking/'.$booking->id.'/delete')}}" class="btn-danger btn btn-sm" id="delete"><i class="fa fa-trash"></i></a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

@@ -61,6 +61,11 @@ class CustomerController extends Controller
             $data['photo'] = $filename;
         }
         $data->save();
+
+        $ref=$request->ref;
+        if($ref=='front'){
+            return redirect('register')->with('success','Registration Successfully!.');
+        }
         Session::flash('success','Customer Added Successfully');
         return redirect()->route('customer.index');
     }
@@ -139,5 +144,36 @@ class CustomerController extends Controller
         $data->delete();
         Session::flash('success','Customer  Deleted Successfully');
         return redirect()->route('customer.index');
+    }
+
+
+     //Login
+    function login(){
+        return view('frontlogin');
+    }
+
+    // Check Login
+    function customer_login(Request $request){
+        $email=$request->email;
+        $pwd=sha1($request->password);
+        $detail=Customer::where(['email'=>$email,'password'=>$pwd])->count();
+        if($detail>0){
+            $detail=Customer::where(['email'=>$email,'password'=>$pwd])->get();
+            session(['customerlogin'=>true,'data'=>$detail]);
+            return redirect('/')->with('success','Login Successfully!.');;
+        }else{
+            return redirect('login')->with('error','Invalid email/password!!');
+        }
+    }
+
+    // register
+    function register(){
+        return view('register');
+    }
+
+    // Logout
+    function logout(){
+        session()->forget(['customerlogin','data']);
+        return redirect('login');
     }
 }

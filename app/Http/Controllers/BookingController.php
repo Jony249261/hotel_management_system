@@ -8,7 +8,7 @@ use App\Models\Customer;
 use App\Models\RoomType;
 use App\Models\Booking;
 
-// use Stripe\Stripe;
+ use Stripe\Stripe;
 
 class BookingController extends Controller
 {
@@ -71,15 +71,15 @@ class BookingController extends Controller
                   'price_data' => [
                     'currency' => 'inr',
                     'product_data' => [
-                      'name' => 'T-shirt',
+                      'name' => 'Room',
                     ],
-                    'unit_amount' => $request->roomprice*100,
+                    'unit_amount' => $request->roomprice,
                   ],
                   'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => 'http://localhost/laravel-apps/hotelManage/booking/success?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => 'http://localhost/laravel-apps/hotelManage/booking/fail',
+                'success_url' => 'http://127.0.0.1:8000/booking/success?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => 'http://127.0.0.1:8000/booking/fail',
             ]);
             return redirect($session->url);
         }else{
@@ -96,7 +96,7 @@ class BookingController extends Controller
                 $data->ref='admin';
             }
             $data->save();
-            return redirect('admin/booking/create')->with('success','Data has been added.');
+            return redirect('admin/booking/create')->with('success','Room Booking Successfully.');
         }
         
     }
@@ -144,7 +144,7 @@ class BookingController extends Controller
     public function destroy($id)
     {
         Booking::where('id',$id)->delete();
-        return redirect('admin/booking')->with('success','Data has been deleted.');
+        return redirect('admin/booking')->with('success','Data has been Deleted Successfully!.');
     }
 
 
